@@ -9,6 +9,7 @@ import {
   ToastAndroid,
 } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
+import firebase from 'react-native-firebase'
 
 import { policeLogo } from '../assets/images'
 import LoginForm from './forms/Login'
@@ -65,7 +66,18 @@ class App extends Component {
       return ToastAndroid.show('Please Enter Valid Password', ToastAndroid.SHORT)
     }
 
-    return ToastAndroid.show('Valid Sign Up Input', ToastAndroid.SHORT)
+    return firebase.auth().createUserWithEmailAndPassword(this.state.signupEmail, this.state.signupPassword)
+      .then((res) => {
+        ToastAndroid.show(`Successfully created account \nfor ${this.state.signupEmail}`, ToastAndroid.LONG)
+        return firebase.database().ref('users/' + res.user.uid).set({
+          serviceNumber: this.state.signupServiceNumber,
+          fullName: this.state.signupFullName,
+          email: this.state.signupEmail,
+        })
+      })
+      .catch((error) => {
+        return ToastAndroid.show(error.message, ToastAndroid.LONG)
+      })
   }
 
   toggleForm = () => {
