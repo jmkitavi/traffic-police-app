@@ -49,7 +49,15 @@ class App extends Component {
       return ToastAndroid.show('Please Enter Valid Password', ToastAndroid.SHORT)
     }
 
-    return ToastAndroid.show('Valid Login Input', ToastAndroid.SHORT)
+    return firebase.auth().signInWithEmailAndPassword(this.state.loginEmail, this.state.loginPassword)
+      .then((user) => {
+        console.log('sign im', user)
+        return ToastAndroid.show(`Successfully logged in \n ${this.state.loginEmail}`, ToastAndroid.LONG)
+      })
+      .catch((error) => {
+        return ToastAndroid.show('Authentication Failed. \n Please check your Login credential', ToastAndroid.LONG)
+
+      })
   }
 
   onSignUpPress = () => {
