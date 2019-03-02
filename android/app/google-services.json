@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "994477509886",
+    "firebase_url": "https://police-app-dcc53.firebaseio.com",
+    "project_id": "police-app-dcc53",
+    "storage_bucket": "police-app-dcc53.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:994477509886:android:7a76a6a567b661c6",
+        "android_client_info": {
+          "package_name": "com.sirjmkitavi.trafficpoliceapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "994477509886-bd8c7u4k4l8kahcqgb2rikcr33p9e8lt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2UvvecZCLCy5p74Edva5pRmDdfmC7Ryk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

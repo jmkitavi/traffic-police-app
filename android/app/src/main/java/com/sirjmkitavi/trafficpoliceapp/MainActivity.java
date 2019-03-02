@@ -1,4 +1,4 @@
-package com.trafficpoliceapp;
+package com.sirjmkitavi.trafficpoliceapp;
 
 import com.facebook.react.ReactActivity;
 
