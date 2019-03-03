@@ -4,27 +4,10 @@ import {
 	Text,
   View,
   StatusBar,
-  Image,
 } from 'react-native'
 import firebase from 'react-native-firebase'
 
-import { policeLogo } from '../../assets/images'
-
-class Home extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: 'Nearby Incidents',
-    headerLeft: (
-      <Image source={policeLogo} style={{ height: '100%', width: 50, marginHorizontal: 10 }} />
-    ),
-    headerStyle: {
-      backgroundColor: '#000440',
-    },
-    headerTitleStyle: {
-      color: 'white',
-      fontWeight: 'bold',
-    },
-  })
-
+class Search extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -32,7 +15,7 @@ class Home extends Component {
           backgroundColor='#000440'
           barStyle='light-content'
         />
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
+        <Text style={styles.welcome}>Welcome to Search!</Text>
         <Text style={styles.instructions}>To get started, edit App.js</Text>
       </View>
     )
@@ -58,4 +41,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Home
+export default Search

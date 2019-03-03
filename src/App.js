@@ -5,15 +5,26 @@ import {
   createAppContainer,
   createSwitchNavigator,
   createDrawerNavigator,
+  createBottomTabNavigator,
 } from 'react-navigation'
 import Auth from './components/Auth/Auth'
 import AuthLoading from './components/AuthLoading/AuthLoading'
 import Home from './components/Home/Home'
+import Search from './components/Search/Search'
+import Report from './components/Report/Report'
+import Info from './components/Info/Info'
+import Profile from './components/Profile/Profile'
 
-const MainNavigator = createDrawerNavigator(
+
+
+const MainNavigator = createBottomTabNavigator(
   {
-    Home,
-  }
+    Home: createStackNavigator({ Home }),
+    Search: createStackNavigator({ Search }),
+    Report: createStackNavigator({ Report }),
+    Info: createStackNavigator({ Info }),
+    Profile: createStackNavigator({ Profile }),
+  },
 )
 
 const switchNavigator = createSwitchNavigator(
