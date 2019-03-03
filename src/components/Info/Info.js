@@ -4,10 +4,27 @@ import {
 	Text,
   View,
   StatusBar,
+  Image,
 } from 'react-native'
 import firebase from 'react-native-firebase'
 
+import { policeLogo } from '../../assets/images'
+
 class Info extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Information',
+    headerLeft: (
+      <Image source={policeLogo} style={{ height: '100%', width: 50, marginHorizontal: 10 }} />
+    ),
+    headerStyle: {
+      backgroundColor: '#000440',
+    },
+    headerTitleStyle: {
+      color: 'white',
+      fontWeight: 'bold',
+    },
+  })
+
   render() {
     return (
       <View style={styles.container}>
