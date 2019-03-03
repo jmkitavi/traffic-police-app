@@ -4,9 +4,10 @@ import {
   createStackNavigator,
   createAppContainer,
   createSwitchNavigator,
-  createDrawerNavigator,
   createBottomTabNavigator,
 } from 'react-navigation'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+
 import Auth from './components/Auth/Auth'
 import AuthLoading from './components/AuthLoading/AuthLoading'
 import Home from './components/Home/Home'
@@ -16,15 +17,65 @@ import Info from './components/Info/Info'
 import Profile from './components/Profile/Profile'
 
 
-
 const MainNavigator = createBottomTabNavigator(
   {
-    Home: createStackNavigator({ Home }),
-    Search: createStackNavigator({ Search }),
-    Report: createStackNavigator({ Report }),
-    Info: createStackNavigator({ Info }),
-    Profile: createStackNavigator({ Profile }),
+    Home: {
+      screen: createStackNavigator({ Home }),
+      navigationOptions: {
+        tabBarIcon: ({ focused, tintColor }) => {
+          return <MaterialCommunityIcons name='home' size={focused ? 40 : 30} color={tintColor} />
+        },
+      },
+    },
+    Search: {
+      screen: createStackNavigator({ Search }),
+      navigationOptions: {
+        tabBarIcon: ({ focused, tintColor }) => {
+          return <MaterialCommunityIcons name='magnify' size={focused ? 40 : 30} color={tintColor} />
+        },
+      },
+    },
+    Report: {
+      screen: createStackNavigator({ Report }),
+      navigationOptions: {
+        tabBarIcon: ({ focused, tintColor }) => {
+          return (
+            <View
+              style={{width: 50, height: 50, backgroundColor: 'red', marginTop: -20, borderRadius: 25, justifyContent: 'center', alignItems: 'center' }}
+            >
+              <MaterialCommunityIcons name='lead-pencil' size={30} color={tintColor} />
+            </View>
+          )
+        },
+      },
+    },
+    Info: {
+      screen: createStackNavigator({ Info }),
+      navigationOptions: {
+        tabBarIcon: ({ focused, tintColor }) => {
+          return <MaterialCommunityIcons name='information-outline' size={focused ? 40 : 30} color={tintColor} />
+        },
+      },
+    },
+    Profile: {
+      screen: createStackNavigator({ Profile }),
+      navigationOptions: {
+        tabBarIcon: ({ focused, tintColor }) => {
+          return <MaterialCommunityIcons name='account-circle' size={focused ? 40 : 30} color={tintColor} />
+        },
+      },
+    },
   },
+  {
+    tabBarOptions: {
+      activeTintColor: 'gold',
+      inactiveTintColor: 'white',
+      style: {
+        height: 60,
+        backgroundColor: '#000440',
+      }
+    }
+  }
 )
 
 const switchNavigator = createSwitchNavigator(
