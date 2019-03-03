@@ -10,7 +10,9 @@
     "react": "16.6.3",
     "react-native": "0.57.8",
     "react-native-firebase": "^5.2.3",
-    "react-native-linear-gradient": "^2.5.3"
+    "react-native-gesture-handler": "^1.0.17",
+    "react-native-linear-gradient": "^2.5.3",
+    "react-navigation": "^3.3.2"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",

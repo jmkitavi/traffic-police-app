@@ -7,11 +7,12 @@ import {
   StatusBar,
   KeyboardAvoidingView,
   ToastAndroid,
+  TouchableOpacity,
 } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import firebase from 'react-native-firebase'
 
-import { policeLogo } from '../assets/images'
+import { policeLogo } from '../../assets/images'
 import LoginForm from './forms/Login'
 import SignUpForm from './forms/SignUp'
 import styles from './styles/styles'
@@ -50,8 +51,14 @@ class App extends Component {
     }
 
     return firebase.auth().signInWithEmailAndPassword(this.state.loginEmail, this.state.loginPassword)
-      .then((user) => {
-        console.log('sign im', user)
+      .then((res) => {
+        firebase.database().ref(`/users/${res.user.uid}`).once('value')
+          .then((snapshot) => {
+            const user = snapshot.val()
+          })
+          .catch((error) => {
+            console.log('error', error)
+          })
         return ToastAndroid.show(`Successfully logged in \n ${this.state.loginEmail}`, ToastAndroid.LONG)
       })
       .catch((error) => {
@@ -136,9 +143,13 @@ class App extends Component {
               source={policeLogo}
               style={styles.logo}
             />
-            <View style={styles.header} >
+            <TouchableOpacity
+              style={styles.header}
+              // onPress={() => console.log('navigate sucker')}
+              onPress={() => this.props.navigation.navigate('Home')}
+            >
               <Text style={styles.headerText}>TRAFFIC POLICE INCIDENT {"\n"} REPORT APP</Text>
-            </View>
+            </TouchableOpacity>
             {this.renderForm()}
           </ScrollView>
         </KeyboardAvoidingView>
