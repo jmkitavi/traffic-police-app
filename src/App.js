@@ -16,15 +16,12 @@ const MainNavigator = createDrawerNavigator(
   }
 )
 
-const switchNavigator = createStackNavigator(
+const switchNavigator = createSwitchNavigator(
   {
     AuthLoading,
     Auth,
-    Home
+    MainNavigator
   },
-  {
-    headerMode: 'none',
-  }
 )
 
 const AppNavigator = createAppContainer(switchNavigator)

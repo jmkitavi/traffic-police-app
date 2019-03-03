@@ -55,6 +55,7 @@ class App extends Component {
         firebase.database().ref(`/users/${res.user.uid}`).once('value')
           .then((snapshot) => {
             const user = snapshot.val()
+            this.props.navigation.navigate('Home', { user })
           })
           .catch((error) => {
             console.log('error', error)
@@ -83,12 +84,22 @@ class App extends Component {
 
     return firebase.auth().createUserWithEmailAndPassword(this.state.signupEmail, this.state.signupPassword)
       .then((res) => {
-        ToastAndroid.show(`Successfully created account \nfor ${this.state.signupEmail}`, ToastAndroid.LONG)
-        return firebase.database().ref('users/' + res.user.uid).set({
+        ToastAndroid.show(`Successfully created account \nfor ${this.state.signupFullName}`, ToastAndroid.LONG)
+        firebase.database().ref('users/' + res.user.uid).set({
           serviceNumber: this.state.signupServiceNumber,
           fullName: this.state.signupFullName,
           email: this.state.signupEmail,
+          uid: res.user.uid,
         })
+
+        const user = {
+          email: this.state.signupEmail,
+          fullName: this.state.signupFullName,
+          serviceNumber: this.state.signupServiceNumber,
+          uid: res.user.uid,
+        }
+  
+        return this.props.navigation.navigate('Home', { user })
       })
       .catch((error) => {
         return ToastAndroid.show(error.message, ToastAndroid.LONG)

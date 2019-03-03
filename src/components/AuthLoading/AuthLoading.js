@@ -16,16 +16,11 @@ class AuthLoading extends React.Component {
   checkLoginStatus = () => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log('check Login Status', user.uid)
-
-        this.props.navigation.navigate('Home')
-
-        return firebase.database().ref('users')
-          .on('value', (snapshot) => {
-            console.log('get users login status', snapshot)
+        return firebase.database().ref(`/users/${user.uid}`).once('value')
+          .then((snapshot) => {
+            const currentUser = snapshot.val()
+            this.props.navigation.navigate('MainNavigator', { currentUser })
           })
-
-        // return this.props.navigation.navigate('Home')
       }
       return this.props.navigation.navigate('Auth')
     })

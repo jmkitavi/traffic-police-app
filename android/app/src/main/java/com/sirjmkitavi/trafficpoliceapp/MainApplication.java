@@ -30,10 +30,10 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new RNGestureHandlerPackage(),
-          new LinearGradientPackage(),
-          new RNFirebasePackage(),
-          new RNFirebaseAuthPackage(),
-          new RNFirebaseDatabasePackage()
+            new LinearGradientPackage(),
+            new RNFirebasePackage(),
+            new RNFirebaseDatabasePackage(),
+            new RNFirebaseAuthPackage()
       );
     }
 
