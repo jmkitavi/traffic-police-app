@@ -1,5 +1,5 @@
 import React from 'react'
-import { StatusBar, View } from 'react-native'
+import { StatusBar, View, KeyboardAvoidingView } from 'react-native'
 import {
   createStackNavigator,
   createAppContainer,
@@ -91,14 +91,14 @@ const AppNavigator = createAppContainer(switchNavigator)
 class App extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <KeyboardAvoidingView enabled style={{ flex: 1 }}>
         <StatusBar
           backgroundColor='black'
           barStyle='light-content'
         />
-
+        
         <AppNavigator />
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }
