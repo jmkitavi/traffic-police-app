@@ -137,6 +137,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-image-picker')
     compile project(':react-native-vector-icons')
     compile project(':react-native-gesture-handler')
     compile project(':react-native-linear-gradient')
@@ -151,6 +152,7 @@ dependencies {
     implementation "com.google.firebase:firebase-core:16.0.6"
     implementation "com.google.firebase:firebase-auth:16.1.0"
     implementation "com.google.firebase:firebase-database:16.0.5"
+    implementation "com.google.firebase:firebase-storage:16.0.5"
 }
 
 // Run this once to be able to run the application with BUCK
