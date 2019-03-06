@@ -23,7 +23,7 @@ const MainNavigator = createBottomTabNavigator(
       screen: createStackNavigator({ Home }),
       navigationOptions: {
         tabBarIcon: ({ focused, tintColor }) => {
-          return <MaterialCommunityIcons name='home' size={focused ? 40 : 30} color={tintColor} />
+          return <MaterialCommunityIcons name='home' size={30} color={tintColor} />
         },
       },
     },
@@ -31,7 +31,7 @@ const MainNavigator = createBottomTabNavigator(
       screen: createStackNavigator({ Search }),
       navigationOptions: {
         tabBarIcon: ({ focused, tintColor }) => {
-          return <MaterialCommunityIcons name='magnify' size={focused ? 40 : 30} color={tintColor} />
+          return <MaterialCommunityIcons name='magnify' size={30} color={tintColor} />
         },
       },
     },
@@ -53,7 +53,7 @@ const MainNavigator = createBottomTabNavigator(
       screen: createStackNavigator({ Info }),
       navigationOptions: {
         tabBarIcon: ({ focused, tintColor }) => {
-          return <MaterialCommunityIcons name='information-outline' size={focused ? 40 : 30} color={tintColor} />
+          return <MaterialCommunityIcons name='information-outline' size={30} color={tintColor} />
         },
       },
     },
@@ -61,7 +61,7 @@ const MainNavigator = createBottomTabNavigator(
       screen: createStackNavigator({ Profile }),
       navigationOptions: {
         tabBarIcon: ({ focused, tintColor }) => {
-          return <MaterialCommunityIcons name='account-circle' size={focused ? 40 : 30} color={tintColor} />
+          return <MaterialCommunityIcons name='account-circle' size={30} color={tintColor} />
         },
       },
     },
