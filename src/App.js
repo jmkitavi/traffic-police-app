@@ -15,12 +15,22 @@ import Search from './components/Search/Search'
 import Report from './components/Report/Report'
 import Info from './components/Info/Info'
 import Profile from './components/Profile/Profile'
+import IncidentDetails from './components/IncidentDetails/IncidentDetails'
 
+const HomeStack = createStackNavigator(
+  {
+    Home,
+    IncidentDetails,
+  },
+  {
+    initialRouteName: 'Home',
+  }
+)
 
 const MainNavigator = createBottomTabNavigator(
   {
     Home: {
-      screen: createStackNavigator({ Home }),
+      screen: HomeStack,
       navigationOptions: {
         tabBarIcon: ({ focused, tintColor }) => {
           return <MaterialCommunityIcons name='home' size={30} color={tintColor} />

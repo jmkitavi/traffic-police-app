@@ -52,6 +52,10 @@ class Home extends Component {
     return <Text>Nothing yet</Text>
   }
 
+  onIncidentPress = (incident) => {
+    this.props.navigation.navigate('IncidentDetails', { incident })
+  }
+
 
   render() {
     return (
@@ -62,7 +66,7 @@ class Home extends Component {
         />
         
         <ScrollView contentContainerStyle={{ margin: 10 }}>
-          {this.state.incidents.map((item) => <Incident incident={item} />)}
+          {this.state.incidents.map((item) => <Incident incident={item} onPress={this.onIncidentPress} />)}
         </ScrollView>
       </View>
     )

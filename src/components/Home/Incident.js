@@ -10,11 +10,11 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const placeHolderURI = 'https://firebasestorage.googleapis.com/v0/b/police-app-dcc53.appspot.com/o/images%2Fimage-cc31babe-4560-4252-bd0e-776a0bc30317.jpg?alt=media&token=30956ae0-af12-43ab-aba4-edd4a22a1ee6'
 
-const Incident = ({ incident }) => {
+const Incident = ({ incident, onPress }) => {
   return (
     <TouchableOpacity
       style={styles.itemContainer}
-      onPress={() => {}}
+      onPress={() => onPress(incident)}
       >
       <View style={styles.imageContainer}>
         <Image
