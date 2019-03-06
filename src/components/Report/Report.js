@@ -10,6 +10,7 @@ import {
   TextInput,
   Picker,
   ToastAndroid,
+  PermissionsAndroid,
 } from 'react-native'
 import firebase from 'react-native-firebase'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -53,6 +54,9 @@ class Report extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      disable: false,
+      latitude: '',
+      longitude: '',
       avatarSource: null,
       incidentType: '',
       offenderName: '',
@@ -65,9 +69,68 @@ class Report extends Component {
   }
 
   componentDidMount() {
+    // this.requestPermission()
+    // this.getLocation()
     this.props.navigation.setParams({
       uploadIncident: this.uploadIncident,
+      disable: this.state.disable,
     })
+  }
+
+  requestPermission = async () => {
+    const locationGranted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      {
+        title: 'Location data is required for reporting incidents.',
+        message: 'All incidents require to be geo tagged.',
+        buttonNeutral: 'Ask Me Later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
+      }
+    )
+    if (!locationGranted === PermissionsAndroid.RESULTS.GRANTED) {
+      ToastAndroid.show('You won\'t be able to report incidents without Location data', ToastAndroid.SHORT)
+      this.setState({
+        disable: true,
+      })
+    }
+
+    const cameraGranted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.CAMERA,
+      {
+        title: 'Cool Photo App Camera Permission',
+        message:
+          'Cool Photo App needs access to your camera ' +
+          'so you can take awesome pictures.',
+        buttonNeutral: 'Ask Me Later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
+      },
+    )
+
+    if (!cameraGranted === PermissionsAndroid.RESULTS.GRANTED) {
+      ToastAndroid.show('You won\'t be able to take photos.', ToastAndroid.SHORT)
+      this.setState({
+        disable: true,
+      })
+    }
+  }
+
+  getLocation = () => {
+    return navigator.geolocation.getCurrentPosition((position) => {
+      console.log('current pos', position)
+      this.setState({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+        error: null,
+      });
+    },
+    (error) => {
+      console.log('error pos', error)
+      this.setState({ error: error.message })
+    },
+    { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+    )
   }
 
   selectPhotoTapped = () => {
@@ -101,6 +164,9 @@ class Report extends Component {
 
 
   uploadIncident = () => {
+    // if (this.state.disable) {
+    //   return ToastAndroid.show('Location data is required for reporting incidents.\nGo to Settings and authorize permissions.', ToastAndroid.LONG)
+    // }
     const uri = this.state.avatarSource
     if (this.state.incidentType.length < 3) {
       return ToastAndroid.show('Please Select Incident Type', ToastAndroid.SHORT)
@@ -120,14 +186,17 @@ class Report extends Component {
 
     return firebase.storage().ref('images/').child(this.state.fileName).putFile(uri)
       .then((snapshot) => {
-        const imageUrl = snapshot.downloadURL;
+        const imageUrl = snapshot.downloadURL
 
         firebase.database().ref('incidents/').push({
           incidentImage: imageUrl,
           incidentType: this.state.incidentType,
           offenderName: this.state.offenderName,
           offenderID: this.state.offenderID,
+          numberPlate: this.state.numberPlate,
           incidentDescription: this.state.incidentDescription,
+          interestedPartiesID: this.state.interestedPartiesID,
+          interestedPartiesPlates: this.state.interestedPartiesPlates,
         })
 
         return this.props.navigation.navigate('Home')
@@ -167,7 +236,7 @@ class Report extends Component {
               }
             <View style={styles.contentContainer}>
               <TouchableOpacity
-                  style={styles.button}
+                  style={[styles.button, this.state.disable && backgroundColor: 'rgb(23, 29, 89, 0.4)']}
                   onPress={() => this.selectPhotoTapped()}
                 >
                 <Text style={styles.buttonText}>{this.state.avatarSource === null ? 'TAKE PHOTO' : 'CHANGE PHOTO'}</Text>
@@ -182,7 +251,7 @@ class Report extends Component {
                 >
                   <Picker.Item label='Select Incident Type...' value='' />
                   <Picker.Item label='Accident' value='Accident' />
-                  <Picker.Item label='Overspeeding' value='Overspeeding' />
+                  <Picker.Item label='Speeding Violation' value='Speeding Violation' />
                   <Picker.Item label='DUI' value='DUI' />
                   <Picker.Item label='Safety Regulations' value='Safety Regulations' />
                   <Picker.Item label='PSV Offences' value='PSV Offences' />
