@@ -27,6 +27,16 @@ const HomeStack = createStackNavigator(
   }
 )
 
+const SearchStack = createStackNavigator(
+  {
+    Search,
+    IncidentDetails,
+  },
+  {
+    initialRouteName: 'Search',
+  }
+)
+
 const MainNavigator = createBottomTabNavigator(
   {
     Home: {
@@ -38,7 +48,7 @@ const MainNavigator = createBottomTabNavigator(
       },
     },
     Search: {
-      screen: createStackNavigator({ Search }),
+      screen: SearchStack,
       navigationOptions: {
         tabBarIcon: ({ focused, tintColor }) => {
           return <MaterialCommunityIcons name='magnify' size={30} color={tintColor} />

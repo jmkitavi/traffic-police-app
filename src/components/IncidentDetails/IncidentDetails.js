@@ -49,7 +49,6 @@ class IncidentDetails extends Component {
   render() {
     const incident = this.props.navigation.getParam('incident', {})
 
-    console.log('incident', incident)
     if (!incident) {
       return <Text>Loading</Text>
     }
