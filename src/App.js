@@ -37,6 +37,16 @@ const SearchStack = createStackNavigator(
   }
 )
 
+const ProfileStack = createStackNavigator(
+  {
+    Profile,
+    IncidentDetails,
+  },
+  {
+    initialRouteName: 'Profile',
+  }
+)
+
 const MainNavigator = createBottomTabNavigator(
   {
     Home: {
@@ -78,7 +88,7 @@ const MainNavigator = createBottomTabNavigator(
       },
     },
     Profile: {
-      screen: createStackNavigator({ Profile }),
+      screen: ProfileStack,
       navigationOptions: {
         tabBarIcon: ({ focused, tintColor }) => {
           return <MaterialCommunityIcons name='account-circle' size={30} color={tintColor} />
