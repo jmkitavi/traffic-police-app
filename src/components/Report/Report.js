@@ -71,9 +71,24 @@ class Report extends Component {
   componentDidMount() {
     // this.requestPermission()
     // this.getLocation()
+    this.getUserData()
     this.props.navigation.setParams({
       uploadIncident: this.uploadIncident,
       disable: this.state.disable,
+    })
+  }
+
+  getUserData = () => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        return firebase.database().ref(`/users/${user.uid}`).once('value')
+          .then((snapshot) => {
+            const currentUser = snapshot.val()
+            this.setState({
+              currentUser: currentUser,
+            })
+          })
+      }
     })
   }
 
@@ -197,7 +212,13 @@ class Report extends Component {
           incidentDescription: this.state.incidentDescription,
           interestedPartiesID: this.state.interestedPartiesID,
           interestedPartiesPlates: this.state.interestedPartiesPlates,
+          officerName: this.state.currentUser.fullName,
+          officerNumber: this.state.currentUser.serviceNumber,
+          officerUID: this.state.currentUser.uid,
+          date: new Date(),
         })
+
+        ToastAndroid.show(`Reported ${this.state.incidentType}.\n Offender: ${this.state.offenderName}.`, ToastAndroid.LONG)
 
         return this.props.navigation.navigate('Home')
       })
