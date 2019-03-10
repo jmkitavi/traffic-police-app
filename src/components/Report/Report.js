@@ -57,7 +57,7 @@ class Report extends Component {
       disable: false,
       latitude: '',
       longitude: '',
-      avatarSource: null,
+      imageSource: null,
       incidentType: '',
       offenderName: '',
       offenderID: '',
@@ -65,17 +65,21 @@ class Report extends Component {
       incidentDescription: '',
       interestedPartiesID: '',
       interestedPartiesPlates: '',
+      locationPermission: '',
+      cameraPermission: '',
+      currentLocation: {},
     }
   }
 
   componentDidMount() {
-    // this.requestPermission()
-    // this.getLocation()
-    this.getUserData()
     this.props.navigation.setParams({
       uploadIncident: this.uploadIncident,
       disable: this.state.disable,
     })
+
+    this.getUserData()
+    this.requestPermission()
+    this.getLocation()
   }
 
   getUserData = () => {
@@ -93,7 +97,7 @@ class Report extends Component {
   }
 
   requestPermission = async () => {
-    const locationGranted = await PermissionsAndroid.request(
+    const locationPermission = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
       {
         title: 'Location data is required for reporting incidents.',
@@ -103,14 +107,12 @@ class Report extends Component {
         buttonPositive: 'OK',
       }
     )
-    if (!locationGranted === PermissionsAndroid.RESULTS.GRANTED) {
+    this.setState({ locationPermission: locationPermission })
+    if (!locationPermission === PermissionsAndroid.RESULTS.GRANTED) {
       ToastAndroid.show('You won\'t be able to report incidents without Location data', ToastAndroid.SHORT)
-      this.setState({
-        disable: true,
-      })
     }
 
-    const cameraGranted = await PermissionsAndroid.request(
+    const cameraPermission = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.CAMERA,
       {
         title: 'Cool Photo App Camera Permission',
@@ -123,32 +125,30 @@ class Report extends Component {
       },
     )
 
-    if (!cameraGranted === PermissionsAndroid.RESULTS.GRANTED) {
+    this.setState({ cameraPermission: cameraPermission })
+    if (!cameraPermission === PermissionsAndroid.RESULTS.GRANTED) {
       ToastAndroid.show('You won\'t be able to take photos.', ToastAndroid.SHORT)
-      this.setState({
-        disable: true,
-      })
     }
   }
 
   getLocation = () => {
     return navigator.geolocation.getCurrentPosition((position) => {
-      console.log('current pos', position)
       this.setState({
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-        error: null,
-      });
+        currentLocation: position,
+      })
     },
     (error) => {
-      console.log('error pos', error)
-      this.setState({ error: error.message })
+      return ToastAndroid.show('Error occured while accessing location data.', ToastAndroid.LONG)
     },
     { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
     )
   }
 
-  selectPhotoTapped = () => {
+  selectPhoto = () => {
+    if (!this.state.cameraPermission === PermissionsAndroid.RESULTS.GRANTED) {
+      return ToastAndroid.show('Permissions are needed to be able to select picture.', ToastAndroid.LONG)
+    }
+
     const options = {
       quality: 1.0,
       maxWidth: 500,
@@ -170,7 +170,7 @@ class Report extends Component {
         // let blob = { uri: 'data:image/jpegbase64,' + response.data }
 
         this.setState({
-          avatarSource: response.uri,
+          imageSource: response.uri,
           fileName: response.fileName,
         })
       }
@@ -179,10 +179,11 @@ class Report extends Component {
 
 
   uploadIncident = () => {
-    // if (this.state.disable) {
-    //   return ToastAndroid.show('Location data is required for reporting incidents.\nGo to Settings and authorize permissions.', ToastAndroid.LONG)
-    // }
-    const uri = this.state.avatarSource
+    const uri = this.state.imageSource
+
+    if (!this.state.locationPermission === PermissionsAndroid.RESULTS.GRANTED) {
+      return ToastAndroid.show('Permissions are needed to be able to select picture.', ToastAndroid.LONG)
+    }
     if (this.state.incidentType.length < 3) {
       return ToastAndroid.show('Please Select Incident Type', ToastAndroid.SHORT)
     }
@@ -216,6 +217,7 @@ class Report extends Component {
           officerNumber: this.state.currentUser.serviceNumber,
           officerUID: this.state.currentUser.uid,
           date: new Date(),
+          location: this.state.currentLocation,
         })
 
         ToastAndroid.show(`Reported ${this.state.incidentType}.\n Offender: ${this.state.offenderName}.`, ToastAndroid.LONG)
@@ -248,9 +250,9 @@ class Report extends Component {
               </View>
             </View>
 
-              {this.state.avatarSource !== null &&
+              {this.state.imageSource !== null &&
                 <Image
-                  source={{ uri: this.state.avatarSource }}
+                  source={{ uri: this.state.imageSource }}
                   style={{ width: '100%', height: 200, width: '95%', alignSelf: 'center' }}
                   resizeMethod='scale'
                 />
@@ -258,9 +260,9 @@ class Report extends Component {
             <View style={styles.contentContainer}>
               <TouchableOpacity
                   style={[styles.button, this.state.disable && backgroundColor: 'rgb(23, 29, 89, 0.4)']}
-                  onPress={() => this.selectPhotoTapped()}
+                  onPress={() => this.selectPhoto()}
                 >
-                <Text style={styles.buttonText}>{this.state.avatarSource === null ? 'TAKE PHOTO' : 'CHANGE PHOTO'}</Text>
+                <Text style={styles.buttonText}>{this.state.imageSource === null ? 'TAKE PHOTO' : 'CHANGE PHOTO'}</Text>
               </TouchableOpacity>
 
 
