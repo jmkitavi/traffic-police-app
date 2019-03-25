@@ -6,10 +6,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     flex: 1,
+    paddingBottom: 100,
   },
   contentContainer: {
     backgroundColor: 'white',
-    flex: 1,
     margin: 7,
     paddingHorizontal: 5,
     height: 300
@@ -23,36 +23,28 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     width: width,
   },
-  contentTitle: {
-    color: 'black',
+  detailsTitle: {
+    fontFamily: 'CaviarDreamsBold',
+    color: 'white',
+    fontSize: 8,
+    lineHeight: 8,
+  },
+  detailsText: {
+    fontFamily: 'CaviarDreamsBold',
+    color: 'white',
     fontSize: 18,
-    lineHeight: 25,
+    lineHeight: 20,
   },
-  itemName: {
-    color: 'grey',
-    fontSize: 15,
-    lineHeight: 18,
-    paddingHorizontal: 10,
-  },
-  bottomContainer: {
-    backgroundColor: 'black',
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  addButton: {
-    width: 130,
-    height: 34,
-    backgroundColor: 'gold',
-    alignItems: 'center',
-    justifyContent: 'center',
+  detailsContainer: {
     flexDirection: 'row',
-    borderRadius: 17,
+    paddingVertical: 8,
+    paddingHorizontal: 15,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#000033',
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8,
   },
-  addText: {
-    color: 'black',
-    fontWeight: 'bold',
-  }
 })
 
 

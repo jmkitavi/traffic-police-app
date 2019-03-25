@@ -54,40 +54,58 @@ class IncidentDetails extends Component {
     }
 
     return (
-      <React.Fragment>
+      <ScrollView contentContainerStyle={styles.container}>
         <StatusBar
           backgroundColor='#000440'
           barStyle='light-content'
         />
-        <ScrollView contentContainerStyle={styles.container}>
-          <View style={styles.imageContainer}>
-            <Image
-              resizeMode='cover'
-              style={styles.image}
-              source={{ uri: incident.incidentImage || placeHolderURI }}
-            />
-          </View>
-          <View style={styles.contentContainer}>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-              <Text style={styles.contentTitle}>{incident.incidentType}</Text>
-              <Text>{incident.numberPlate}</Text>
-            </View>
-            <Text style={styles.itemName}>{incident.incidentDescription}</Text>
+        <View style={styles.imageContainer}>
+          <Image
+            resizeMode='cover'
+            style={styles.image}
+            source={{ uri: incident.incidentImage || placeHolderURI }}
+          />
+        </View>
+        <View style={styles.contentContainer}>
+          <View style={styles.detailsContainer}>
             <View>
-              <Text style={styles.contentTitle}>Offender</Text>
-              <Text style={styles.itemName}>{incident.offenderName}</Text>
-              <Text style={styles.itemName}>{incident.offenderID}</Text>
+              <Text style={styles.detailsTitle}>INCIDENT TYPE</Text>
+              <Text style={styles.detailsText}>{incident.incidentType.toUpperCase()}</Text>
+              <Text style={[styles.detailsTitle, { marginTop: 8 }]}>NUMBER PLATE</Text>
+              <Text style={styles.detailsText}>{incident.numberPlate.toUpperCase()}</Text>
             </View>
-            {incident.interestedPartiesID.length > 0 || incident.interestedPartiesPlates.length > 0 &&
-              <View>
-                <Text style={styles.contentTitle}>Interested Parties</Text>
-                <Text style={styles.itemName}>{incident.interestedPartiesID}</Text>
-                <Text style={styles.itemName}>{incident.interestedPartiesPlates}</Text>
-              </View>
-            }
+            <View>
+              <Text style={styles.detailsTitle}>OFFENDER NAME</Text>
+              <Text style={styles.detailsText}>{incident.offenderName}</Text>
+              <Text style={[styles.detailsTitle, { marginTop: 8 }]}>OFFENDER ID</Text>
+              <Text style={styles.detailsText}>{incident.offenderID.toUpperCase()}</Text>
+            </View>
           </View>
-        </ScrollView>
-      </React.Fragment>
+          <View style={{ marginVertical: 10 }}>
+            <Text style={{ fontFamily: 'CaviarDreamsBold', color: 'black', fontSize: 14, lineHeight: 30 }}>DESCRIPTION</Text>
+            <View style={{ borderWidth: .5, borderColor: 'black', borderRadius: 5 }}>
+              <Text style={{ fontFamily: 'CaviarDreamsBold', color: 'black', fontSize: 13, padding: 8 }}>{incident.incidentDescription}</Text>
+            </View>
+          </View>
+          {incident.interestedPartiesID.length < 0 || incident.interestedPartiesPlates.length > 0 &&
+            <View style={{ marginVertical: 10, borderBottomWidth: .5 }}>
+              <Text style={{ fontFamily: 'CaviarDreamsBold', color: 'black', fontSize: 14, lineHeight: 30 }}>Interested Parties</Text>
+              <Text style={{ fontFamily: 'CaviarDreamsBold', color: 'black', fontSize: 13, padding: 8 }}>ID NUMBER: {incident.interestedPartiesID}</Text>
+              <Text style={{ fontFamily: 'CaviarDreamsBold', color: 'black', fontSize: 13, padding: 8 }}>NUMBER PLATE: {incident.interestedPartiesPlates}</Text>
+            </View>
+          }
+          <View style={[styles.detailsContainer, { height: 50 }]}>
+            <View>
+              <Text style={styles.detailsTitle}>OFFICER NAME</Text>
+              <Text style={styles.detailsText}>{incident.officerName}</Text>
+            </View>
+            <View>
+              <Text style={styles.detailsTitle}>OFFICER ID</Text>
+              <Text style={styles.detailsText}>{incident.officerNumber.toUpperCase()}</Text>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
     )
   }
 }
