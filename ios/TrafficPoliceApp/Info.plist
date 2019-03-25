@@ -70,6 +70,10 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>CaviarDreams.ttf</string>
+		<string>CaviarDreamsBold.ttf</string>
+		<string>CaviarDreamsBoldItalic.ttf</string>
+		<string>CaviarDreamsItalic.ttf</string>
 	</array>
 </dict>
 </plist>
