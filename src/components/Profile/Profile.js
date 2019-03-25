@@ -21,7 +21,7 @@ const userPlaceholder = 'https://firebasestorage.googleapis.com/v0/b/police-app-
 
 class Profile extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'Incident Details',
+    title: 'Officer Profile',
     headerLeft: (
       <TouchableOpacity
         onPress={() => navigation.goBack()}
