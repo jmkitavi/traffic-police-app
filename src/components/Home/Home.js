@@ -114,14 +114,14 @@ class Home extends Component {
         )}
 
         <FAB
-          buttonColor='#000440'
-          iconTextColor="#FFFFFF"
+          buttonColor={this.state.mapView ? 'white' : '#000440'}
+          iconTextColor={this.state.mapView ?  'black' : 'white'}
           onClickAction={() => this.setState(prevState => ({ mapView: !prevState.mapView }))}
           visible={true}
           iconTextComponent={
           this.state.mapView ?
-            <MaterialCommunityIcons name='library-books' size={40} color='black' /> :
-            <MaterialCommunityIcons name='map-search' size={35} color='black' />
+            <MaterialCommunityIcons name='library-books' size={40} /> :
+            <MaterialCommunityIcons name='map-search' size={40} />
           }
         />
 
