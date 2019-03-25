@@ -91,7 +91,7 @@ class Home extends Component {
         />
 
         {!this.state.mapView ? (
-          <ScrollView contentContainerStyle={{ margin: 10 }}>
+          <ScrollView contentContainerStyle={{ marginTop: 10 }}>
             {this.state.incidents.map((item) => <Incident incident={item} onPress={this.onIncidentPress} />)}
           </ScrollView>
         ) : (

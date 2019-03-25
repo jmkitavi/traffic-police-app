@@ -105,7 +105,7 @@ class Profile extends Component {
             <Text>{this.state.currentUser.serviceNumber}</Text>
             <Text>{this.state.currentUser.email}</Text>
           </View>
-          <View style={{ marginTop: 10 }}>
+          <View style={{ margin: 8 }}>
             <Text style={{ paddingLeft: 10, lineHeight: 30, fontSize: 18, color: 'black', fontWeight: 'bold'}}>Reported Incidents</Text>
             {this.state.incidents.map((incident, index) => {
               return <Incident incident={incident} key={index} onPress={this.onIncidentPress} />

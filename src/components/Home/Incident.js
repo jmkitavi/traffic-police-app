@@ -25,12 +25,16 @@ const Incident = ({ incident, onPress }) => {
       </View>
       <View style={styles.detailsContainer}>
         <View>
-          <Text style={styles.incidentType}>{incident.incidentType} </Text>
-          <Text style={styles.incidentInfo}>{incident.numberPlate} </Text>
+          <Text style={styles.detailsTitle}>INCIDENT TYPE</Text>
+          <Text style={styles.detailsText}>{incident.incidentType.toUpperCase()}</Text>
+          <Text style={[styles.detailsTitle, { marginTop: 8 }]}>NUMBER PLATE</Text>
+          <Text style={styles.detailsText}>{incident.numberPlate.toUpperCase()}</Text>
         </View>
         <View>
-          <Text style={styles.incidentInfo}>{incident.offenderName} </Text>
-          <Text style={styles.incidentInfo}>{incident.offenderID} </Text>
+          <Text style={styles.detailsTitle}>OFFENDER NAME</Text>
+          <Text style={styles.detailsText}>{incident.offenderName}</Text>
+          <Text style={[styles.detailsTitle, { marginTop: 8 }]}>OFFENDER ID</Text>
+          <Text style={styles.detailsText}>{incident.offenderID.toUpperCase()}</Text>
         </View>
       </View>
     </TouchableOpacity>

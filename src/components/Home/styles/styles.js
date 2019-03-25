@@ -5,48 +5,43 @@ let { height, width } = Dimensions.get('window')
 const styles = StyleSheet.create({
   itemContainer: {
     backgroundColor: 'white',
-    marginBottom: 10,
-    elevation: 1,
+    marginBottom: 8,
+    elevation: 3,
   },
   imageContainer: {
-    height: 160,
+    height: 180,
     overflow: 'hidden',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
   },
   image: {
     flex: 1,
     alignSelf: 'center',
-    width: width - 20
+    width: width - 10
   },
   detailsContainer: {
-    marginHorizontal: 15,
-    marginTop: 5,
-    marginBottom: 5,
+    height: 80,
     flexDirection: 'row',
-    flex: 1,
+    paddingVertical: 8,
+    paddingHorizontal: 15,
     justifyContent: 'space-between',
-    alignContent: 'center'
+    alignContent: 'center',
+    backgroundColor: '#000033',
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8,
   },
-  incidentType: {
-    color: 'black',
-    fontSize: 16,
-    lineHeight: 18,
+  detailsTitle: {
+    fontFamily: 'CaviarDreamsBold',
+    color: 'white',
+    fontSize: 8,
+    lineHeight: 8,
   },
-  incidentInfo: {
-    fontSize: 12,
-    color: '#9d9595',
+  detailsText: {
+    fontFamily: 'CaviarDreamsBold',
+    color: 'white',
+    fontSize: 18,
+    lineHeight: 20,
   },
-  addButton: {
-    height: 26,
-    width: 26,
-    borderRadius: 13,
-    backgroundColor: 'black',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  addText: {
-    fontSize: 10,
-    lineHeight: 12,
-  }
 })
 
 
