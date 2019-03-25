@@ -23,17 +23,6 @@ class Profile extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Officer Profile',
     headerLeft: (
-      <TouchableOpacity
-        onPress={() => navigation.goBack()}
-      >
-        <MaterialCommunityIcons
-          name='chevron-left'
-          color='white'
-          size={35}
-        />
-      </TouchableOpacity>
-    ),
-    headerRight: (
       <Image source={policeLogo} style={{ height: '100%', width: 50, marginHorizontal: 10 }} />
     ),
     headerStyle: {
