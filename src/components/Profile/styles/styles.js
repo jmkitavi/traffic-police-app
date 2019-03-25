@@ -5,25 +5,33 @@ let { height, width } = Dimensions.get('window')
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
-    // flex: 1,
+    flex: 1,
   },
   userInfoContainer: {
     backgroundColor: 'white',
     width: '100%',
     alignItems: 'center',
-    padding: 20,
+    paddingBottom: 20,
   },
   image: {
-    height: 100,
-    width: 100,
-    borderRadius: 50,
+    height: 200,
+    width: 200,
+    borderRadius: 100,
     alignSelf: 'center',
     margin: 10
   },
-  contentTitle: {
+  userDetails: {
+    fontSize: 16,
+    lineHeight: 20,
     color: 'black',
+    fontFamily: 'CaviarDreamsBold',
+  },
+  contentTitle: {
     fontSize: 18,
-    lineHeight: 25,
+    color: 'black',
+    lineHeight: 32,
+    paddingLeft: 10,
+    fontFamily: 'CaviarDreamsBold',
   },
   itemName: {
     color: 'grey',
