@@ -75,6 +75,7 @@ class Home extends Component {
           return (
             <Marker
               coordinate={{latitude, longitude}}
+              onPress={() => this.onIncidentPress(item)}
             />
           )
         }
@@ -87,7 +88,8 @@ class Home extends Component {
           let { latitude, longitude } = item.location.coords
           return (
             <Marker
-            coordinate={{latitude, longitude}}
+              coordinate={{latitude, longitude}}
+              onPress={() => this.onIncidentPress(item)}
             />
           )
         }
