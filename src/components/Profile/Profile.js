@@ -48,6 +48,11 @@ class Profile extends Component {
     this.getUserInfo()
   }
 
+  signOut = () => {
+    firebase.auth().signOut();
+    this.props.navigation.navigate('Auth')
+  }
+
   getUserInfo = () => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -93,6 +98,13 @@ class Profile extends Component {
             <Text style={styles.userDetails}>{this.state.currentUser.fullName}</Text>
             <Text style={styles.userDetails}>{this.state.currentUser.serviceNumber}</Text>
             <Text style={styles.userDetails}>{this.state.currentUser.email}</Text>
+
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => this.signOut()}
+            >
+              <Text style={styles.buttonText}>LOG OUT</Text>
+            </TouchableOpacity>
           </View>
           <View style={{ margin: 8 }}>
             <Text style={styles.contentTitle}>Reported Incidents</Text>

@@ -57,7 +57,20 @@ const styles = StyleSheet.create({
   addText: {
     color: 'black',
     fontWeight: 'bold',
-  }
+  },
+  button: {
+    width: '40%',
+    height: 30,
+    borderRadius: 5,
+    backgroundColor: 'grey',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 5
+  },
+  buttonText: {
+    fontFamily: 'CaviarDreamsBold',
+    color: 'white',
+  },
 })
 
 
