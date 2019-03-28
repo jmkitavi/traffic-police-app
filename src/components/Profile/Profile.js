@@ -67,7 +67,7 @@ class Profile extends Component {
                 const incidents = Object.values(snapshot.val())
                 const userIncidents = incidents.filter(incident => incident.officerUID === currentUser.uid)
                 this.setState({
-                  incidents: incidents,
+                  incidents: userIncidents,
                 })
               })
           })
@@ -109,7 +109,7 @@ class Profile extends Component {
           <View style={{ margin: 8 }}>
             <Text style={styles.contentTitle}>Reported Incidents</Text>
             {this.state.incidents.map((incident, index) => {
-              return <Incident incident={incident} key={index} onPress={this.onIncidentPress} />
+                return <Incident incident={incident} key={index} onPress={this.onIncidentPress} />
             })}
           </View>
         </ScrollView>
