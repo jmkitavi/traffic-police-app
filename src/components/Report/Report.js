@@ -115,10 +115,10 @@ class Report extends Component {
     const cameraPermission = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.CAMERA,
       {
-        title: 'Cool Photo App Camera Permission',
+        title: 'Camera Permission',
         message:
-          'Cool Photo App needs access to your camera ' +
-          'so you can take awesome pictures.',
+          'Incident Report App needs access to your camera ' +
+          'so you can take incident pictures.',
         buttonNeutral: 'Ask Me Later',
         buttonNegative: 'Cancel',
         buttonPositive: 'OK',
@@ -184,6 +184,8 @@ class Report extends Component {
     if (!this.state.locationPermission === PermissionsAndroid.RESULTS.GRANTED) {
       return ToastAndroid.show('Permissions are needed to be able to select picture.', ToastAndroid.LONG)
     }
+    this.getLocation()
+
     if (this.state.incidentType.length < 3) {
       return ToastAndroid.show('Please Select Incident Type', ToastAndroid.SHORT)
     }
