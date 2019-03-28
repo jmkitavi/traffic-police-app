@@ -25,7 +25,6 @@ const Login = ({ toggleForm, onChangeText, onPress }) => {
             style={styles.input}
             placeholder="Enter Password"
             underlineColorAndroid='transparent'
-            keyboardType="email-address"
             secureTextEntry
             onChangeText={(text) => onChangeText('loginPassword', text)}
           />
