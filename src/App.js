@@ -97,6 +97,7 @@ const MainNavigator = createBottomTabNavigator(
     },
   },
   {
+    resetOnBlur: true,
     tabBarOptions: {
       activeTintColor: 'gold',
       inactiveTintColor: 'white',
