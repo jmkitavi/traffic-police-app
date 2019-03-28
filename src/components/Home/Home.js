@@ -39,6 +39,7 @@ class Home extends Component {
       incidents: [],
       mapView: false,
       incidentType: '',
+      minZoomLevel: null,
     }
   }
 
@@ -66,20 +67,31 @@ class Home extends Component {
 
   renderMarkers = () => {
     let incidents = this.state.incidents
+
     if(this.state.incidentType === '') {
-      return this.state.incidents.map(item =>
-        <Marker
-          coordinate={item.location.coords}
-        />
-        )
+      return incidents.map((item) => {
+        if (item.location) {
+          let { latitude, longitude } = item.location.coords
+          return (
+            <Marker
+              coordinate={{latitude, longitude}}
+            />
+          )
+        }
+      })
     }
 
     return incidents.filter(incident => incident.incidentType === this.state.incidentType)
-      .map(item =>
-          <Marker
-            coordinate={item.location.coords}
-          />
-        )
+      .map((item) => {
+        if (item.location) {
+          let { latitude, longitude } = item.location.coords
+          return (
+            <Marker
+            coordinate={{latitude, longitude}}
+            />
+          )
+        }
+      })
   }
 
   render() {
@@ -103,10 +115,17 @@ class Home extends Component {
             showsMyLocationButton
             showsUserLocation
             initialRegion={{
-              latitude: 0.204084,
-              longitude: 37.809983,
-              latitudeDelta: 6,
-              longitudeDelta: 7,
+              latitude: -1.2942026,
+              longitude: 36.8194613,
+              latitudeDelta: 0.3,
+              longitudeDelta: 0.3,
+            }}
+            // maxZoomLevel={12}
+            minZoomLevel={this.state.minZoomLevel}
+            onMapReady={() => {
+              this.setState({
+                minZoomLevel: 8,
+              })
             }}
           >
             {this.renderMarkers()}
