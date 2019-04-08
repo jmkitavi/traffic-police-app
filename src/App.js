@@ -7,6 +7,7 @@ import {
   createBottomTabNavigator,
 } from 'react-navigation'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import Geocoder from 'react-native-geocoding'
 
 import Auth from './components/Auth/Auth'
 import AuthLoading from './components/AuthLoading/AuthLoading'
@@ -16,6 +17,9 @@ import Report from './components/Report/Report'
 import Info from './components/Info/Info'
 import Profile from './components/Profile/Profile'
 import IncidentDetails from './components/IncidentDetails/IncidentDetails'
+
+
+Geocoder.init("AIzaSyBVNwukwIdxh-fhX3UkbaFA742SdLxrUW8")
 
 const HomeStack = createStackNavigator(
   {

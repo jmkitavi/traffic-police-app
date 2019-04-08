@@ -11,6 +11,7 @@ import {
 import { HeaderBackButton } from 'react-navigation'
 import firebase from 'react-native-firebase'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import Geocoder from 'react-native-geocoding'
 
 import { policeLogo } from '../../assets/images'
 import styles from './styles/styles'
@@ -52,7 +53,7 @@ class IncidentDetails extends Component {
     if (!incident) {
       return <Text>Loading</Text>
     }
-
+    
     return (
       <ScrollView contentContainerStyle={styles.container}>
         <StatusBar
@@ -87,6 +88,16 @@ class IncidentDetails extends Component {
               <Text style={{ fontFamily: 'CaviarDreamsBold', color: 'black', fontSize: 13, padding: 8 }}>{incident.incidentDescription}</Text>
             </View>
           </View>
+          {incident.location.coords &&
+            <View style={{ marginVertical: 10 }}>
+              <Text style={{ fontFamily: 'CaviarDreamsBold', color: 'black', fontSize: 14, lineHeight: 30 }}>LOCATION</Text>
+              <View style={{ borderWidth: .5, borderColor: 'black', borderRadius: 5 }}>
+                <Text style={{ fontFamily: 'CaviarDreamsBold', color: 'black', fontSize: 13, padding: 8 }}>
+                  {incident.geoName}
+                </Text>
+              </View>
+            </View>
+          }
           {incident.interestedPartiesID.length < 0 || incident.interestedPartiesPlates.length > 0 &&
             <View style={{ marginVertical: 10, borderBottomWidth: .5 }}>
               <Text style={{ fontFamily: 'CaviarDreamsBold', color: 'black', fontSize: 14, lineHeight: 30 }}>Interested Parties</Text>

@@ -13,6 +13,7 @@ import firebase from 'react-native-firebase'
 import MapView, { Marker } from 'react-native-maps'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import FAB from 'react-native-fab'
+import Geocoder from 'react-native-geocoding'
 
 import { policeLogo } from '../../assets/images'
 import Incident from './Incident'
@@ -61,8 +62,19 @@ class Home extends Component {
     return <Text>Nothing yet</Text>
   }
 
-  onIncidentPress = (incident) => {
-    this.props.navigation.navigate('IncidentDetails', { incident })
+  onIncidentPress = async (incident) => {
+    let geoName
+    if (incident.location) {
+      let coords = incident.location.coords
+
+      await Geocoder.from(coords.latitude, coords.longitude)
+        .then(json => {
+          let geoName = json.results[0].formatted_address;
+          
+          this.props.navigation.navigate('IncidentDetails', { incident: { ...incident, geoName } })
+        })
+        .catch(error => console.warn(error));
+      }
   }
 
   renderMarkers = () => {

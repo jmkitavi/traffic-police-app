@@ -11,6 +11,7 @@ import {
 import { HeaderBackButton } from 'react-navigation'
 import firebase from 'react-native-firebase'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import Geocoder from 'react-native-geocoding'
 
 import { policeLogo } from '../../assets/images'
 import styles from './styles/styles'
@@ -75,8 +76,19 @@ class Profile extends Component {
     })
   }
 
-  onIncidentPress = (incident) => {
-    this.props.navigation.navigate('IncidentDetails', { incident })
+  onIncidentPress = async (incident) => {
+    let geoName
+    if (incident.location) {
+      let coords = incident.location.coords
+
+      await Geocoder.from(coords.latitude, coords.longitude)
+        .then(json => {
+          let geoName = json.results[0].formatted_address;
+          
+          this.props.navigation.navigate('IncidentDetails', { incident: { ...incident, geoName } })
+        })
+        .catch(error => console.warn(error));
+      }
   }
 
 

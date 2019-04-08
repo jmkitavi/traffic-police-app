@@ -160,7 +160,6 @@ class App extends Component {
             />
             <TouchableOpacity
               style={styles.header}
-              // onPress={() => console.log('navigate sucker')}
               onPress={() => this.props.navigation.navigate('Home')}
             >
               <Text style={styles.headerText}>TRAFFIC POLICE INCIDENT {"\n"} REPORT APP</Text>
