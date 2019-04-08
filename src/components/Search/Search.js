@@ -47,7 +47,11 @@ class Search extends Component {
   }
 
   filterSearch = (arr, searchKey) => {
-    return arr.filter(obj => Object.keys(obj).some(key => obj[key].toLowerCase().includes(searchKey.toLowerCase())));
+    return arr.filter(obj => Object.keys(obj).some(key => {
+      if (typeof(obj[key]) !== 'object' && !obj[key].includes('https')) {
+        return obj[key].toLowerCase().includes(searchKey.toLowerCase())
+      }
+    }));
   }
 
   renderIncident = () => {
