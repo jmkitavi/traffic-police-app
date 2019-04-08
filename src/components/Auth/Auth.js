@@ -92,6 +92,10 @@ class App extends Component {
           uid: res.user.uid,
         })
 
+        firebase.auth().currentUser.sendEmailVerification().then(() => {
+          ToastAndroid.show(`Check verification email \nfor ${this.state.signupEmail}`, ToastAndroid.LONG)
+        })
+
         const user = {
           email: this.state.signupEmail,
           fullName: this.state.signupFullName,
