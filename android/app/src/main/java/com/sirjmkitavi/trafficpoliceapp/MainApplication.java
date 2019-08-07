@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import com.airbnb.android.react.maps.MapsPackage;
+import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -34,6 +35,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new MapsPackage(),
+            new RNGoogleSigninPackage(),
             new ImagePickerPackage(),
             new VectorIconsPackage(),
             new RNGestureHandlerPackage(),

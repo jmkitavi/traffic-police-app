@@ -8,6 +8,7 @@ import {
 } from 'react-navigation'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Geocoder from 'react-native-geocoding'
+import { GoogleSignin } from 'react-native-google-signin'
 
 import Auth from './components/Auth/Auth'
 import AuthLoading from './components/AuthLoading/AuthLoading'
@@ -124,6 +125,11 @@ const switchNavigator = createSwitchNavigator(
 const AppNavigator = createAppContainer(switchNavigator)
 
 class App extends React.Component {
+
+  componentDidMount = () => {
+    GoogleSignin.configure()
+  }
+
   render() {
     return (
       <KeyboardAvoidingView enabled style={{ flex: 1 }}>

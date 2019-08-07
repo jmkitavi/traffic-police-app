@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "994477509886-jf4pt72euv17f5ec5mvdb26q46sj3vhd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sirjmkitavi.trafficpoliceapp",
+            "certificate_hash": "61aca33f97dfdc374c49e92f638e71df47a52298"
+          }
+        },
+        {
+          "client_id": "994477509886-8p54q7s37o3h02e1surbqq7ars893quc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sirjmkitavi.trafficpoliceapp",
+            "certificate_hash": "8655add5e898a17f753d0fc1a24a26bc2b9b6f4e"
+          }
+        },
+        {
           "client_id": "994477509886-bd8c7u4k4l8kahcqgb2rikcr33p9e8lt.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -25,15 +41,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "994477509886-bd8c7u4k4l8kahcqgb2rikcr33p9e8lt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

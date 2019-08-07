@@ -13,6 +13,7 @@
     "react-native-firebase": "^5.2.3",
     "react-native-geocoding": "^0.3.0",
     "react-native-gesture-handler": "^1.0.17",
+    "react-native-google-signin": "^2.0.0",
     "react-native-image-picker": "^0.28.0",
     "react-native-linear-gradient": "^2.5.3",
     "react-native-maps": "^0.23.0",

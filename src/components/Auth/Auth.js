@@ -11,6 +11,7 @@ import {
 } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import firebase from 'react-native-firebase'
+import { GoogleSignin, statusCodes } from 'react-native-google-signin'
 
 import { policeLogo } from '../../assets/images'
 import LoginForm from './forms/Login'
@@ -41,6 +42,30 @@ class App extends Component {
       [stateItem]: value
     })
   }
+
+  googleSignIn = async () => {
+    console.log('googleSignIn pressed')
+
+    try {
+      await GoogleSignin.hasPlayServices()
+      const userInfo = await GoogleSignin.signIn();
+      // this.setState({ userInfo });
+      console.log('GoogleSignin userInfo', userInfo)
+    } catch (error) {
+      console.log('GoogleSignin error', error)
+      console.log('GoogleSignin error code', error.code)
+
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        // operation (f.e. sign in) is in progress already
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+      } else {
+        // some other error happened
+      }
+    }
+  };
 
   onLoginPress = () => {
     if (!emailRegex.test(this.state.loginEmail)) {
@@ -122,7 +147,7 @@ class App extends Component {
         <LoginForm
           toggleForm={this.toggleForm}
           onChangeText={this.onChangeText}
-          onPress={this.onLoginPress}
+          onPress={this.googleSignIn}
         />
       )
     }
